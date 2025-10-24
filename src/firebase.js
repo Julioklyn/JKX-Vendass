@@ -2,7 +2,7 @@ import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAnalytics, isSupported } from "firebase/analytics";
 import {
   getAuth,
-  GoogleAuthProvider,
+  GoogleAuthProvider
   signInWithPopup,
   signOut,
 } from "firebase/auth";
