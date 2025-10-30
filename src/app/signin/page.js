@@ -5,6 +5,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { useState } from 'react';
 import { signinWithGoogle } from '../../firebase';  // Ajuste para o nome correto do export
+import {doLogin} from '../../lib/AuthHandler';
 
 export default function Signin() {
     const [loading, setLoading] = useState(false);
@@ -22,7 +23,10 @@ export default function Signin() {
                 photoUrl: userObj.photoURL,
                 uid: userObj.uid,
             });
-            console.log("Usuário logado:", userObj);
+        
+            doLogin(userObj.accessToken, userObj);
+
+            window.location.href = '/';
         } catch (err) {
             console.error("Erro no login com Google:", err);
             setError(err.message || 'Erro no login');
@@ -62,6 +66,10 @@ export default function Signin() {
                 <p className={styles.register}>
                     Não tem uma conta? <a href='/signup'>Cadastre-se</a>
                 </p>
+
+                {error && <p style={{ color: redirect,marginTop:12 }}>{error}
+                </p>}
+
             </div>
 
             <p className={styles.terms}>
